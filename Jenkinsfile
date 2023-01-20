@@ -9,13 +9,6 @@ pipeline {
     }
   
   stages {
-
-    stage ('Clean workspace') {
-  steps {
-    cleanWs()
-  }
-}
-
         stage('Build') {
       steps {
         bat "dotnet restore net.csproj"
