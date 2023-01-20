@@ -5,17 +5,22 @@ pipeline {
   environment {
         MSBUILD = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Msbuild\\Current\\Bin\\MSBuild.exe"
         CONFIG = 'Release'
-        PLATFORM = 'x86'
+        PLATFORM = 'x64'
     }
   
   stages {
 
+    stage ('Clean workspace') {
+  steps {
+    cleanWs()
+  }
+}
 
         stage('Build') {
       steps {
         bat "dotnet restore net.csproj"
 
-        bat "\"${MSBUILD}\" net.sln /p:Configuration=${env.CONFIG} /p:AppxBundlePlatforms=${env.PLATFORM}  /p:AppxBundle=Never /p:UapAppxPackageBuildMode=Sideloading  /p:AppxPackageSigningEnabled=false"
+        bat "\"${MSBUILD}\" net.sln /nologo /nr:false  /p:platform=\"x64\" /p:configuration=\"release\" /t:clean;restore;rebuild
 
             }
       post{
