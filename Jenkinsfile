@@ -13,7 +13,7 @@ pipeline {
 
         stage('Build') {
       steps {
-        bat "dotnet net.csproj"
+        bat "dotnet restore net.csproj"
 
         bat "\"${MSBUILD}\" net.sln /p:Configuration=${env.CONFIG} /p:AppxBundlePlatforms=${env.PLATFORM}  /p:AppxBundle=Never /p:UapAppxPackageBuildMode=Sideloading  /p:AppxPackageSigningEnabled=false"
 
