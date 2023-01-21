@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
       steps {
 
-        bat "\"${MSBUILD}\" net.sln /t:restore /nologo /nr:false /p:Configuration=Release /p:Platform=\"Any CPU\""
+        bat "\"${MSBUILD}\" net.sln /t:restore /nologo /nr:false /p:Configuration=\"Release\" /p:Platform=\"Any CPU\""
 
             }
         }
