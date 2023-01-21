@@ -11,7 +11,7 @@ pipeline {
   stages {
         stage('Build') {
       steps {
-        bat "dotnet restore net.csproj"
+        bat "\"${MSBUILD}\" net.sln /t:restore"
 
         bat "\"${MSBUILD}\" net.sln /nologo /nr:false /p:Configuration=Release /p:Platform=\"Any CPU\""
 
