@@ -11,7 +11,7 @@ pipeline {
   stages {
         stage('Build') {
       steps {
-        bat "\"${MSBUILD}\" net.sln /t:restore"
+        bat "\"${MSBUILD}\" /t:restore"
 
         bat "\"${MSBUILD}\" net.sln /nologo /nr:false /p:Configuration=Release /p:Platform=\"Any CPU\""
 
