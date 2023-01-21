@@ -15,11 +15,6 @@ pipeline {
         bat "\"${MSBUILD}\" net.sln /t:restore /nologo /nr:false /p:Configuration=Release /p:Platform=\"Any CPU\""
 
             }
-      post{
-          always {
-           archiveArtifacts artifacts: '**/*.msix', followSymlinks: false
-                }
-            }
         }
     }
 }
