@@ -13,7 +13,7 @@ pipeline {
       steps {
         bat "dotnet restore net.csproj"
 
-        bat "\"${MSBUILD}\" net.sln /nologo /nr:false /t:clean;restore;rebuild"
+        bat "\"${MSBUILD}\" net.sln /nologo /nr:false /p:Configuration=Release /p:Platform=\"Any CPU\" /t:clean;restore;rebuild"
 
             }
       post{
