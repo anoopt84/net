@@ -1,19 +1,17 @@
 pipeline {
-  
-  agent any
-
-  environment {
-        MSBUILD = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Msbuild\\Current\\Bin\\MSBuild.exe"
-        CONFIG = 'Release'
-        PLATFORM = 'x64'
+    agent any
+    environment {
+        dotnet = 'C:\\Program Files\\dotnet\\dotnet.exe'
     }
-  
-  stages {
-        stage('Build') {
-      steps {
-
-        bat "\"${MSBUILD}\" net.sln /t:restore /nologo /nr:false /p:Configuration=\"release\" /p:Platform=\"Any CPU\""
-
+    stages {
+        stage('Build Stage') {
+            steps {
+                bat 'dotnet build %WORKSPACE%\\net.sln --configuration Release'
+            }
+        }
+        stage("Release Stage") {
+            steps {
+                bat 'dotnet build %WORKSPACE%\\net.sln /p:PublishProfile=" %WORKSPACE%\\net\\Properties\\PublishProfiles\\FolderProfile.pubxml" /p:Platform="Any CPU" /p:DeployOnBuild=true /m /p:DeleteExistingFiles=true /p:publishUrl=\\\\localhost\\C$\\inetpub\\wwwroot\\net'
             }
         }
     }
